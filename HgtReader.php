@@ -1,4 +1,4 @@
-
+<?php
 class HgtReader{
 
 	private static $htgFilesDestination;
