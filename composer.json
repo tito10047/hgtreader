@@ -1,0 +1,20 @@
+{
+  "name": "mostka/hgtreader",
+  "license": "Apache-2.0",
+  "description": "World elevations reader",
+  "keywords": [
+    "hgt"
+  ],
+  "authors": [
+    {
+      "name": "Jozef Môstka",
+      "email": "jozef@mostka.com",
+      "homepage": "https://github.com/tito10047/hgt-reader"
+    }
+  ],
+  "autoload": {
+    "classmap": [
+      "HgtReader.php"
+    ]
+  }
+}
