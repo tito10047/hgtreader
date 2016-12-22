@@ -132,7 +132,7 @@ class HgtReader {
 
 	private static function getDeg($deg, $numPrefix) {
 		$deg = abs($deg);
-		$d   = round($deg, 0);     // round degrees
+		$d   = floor($deg);     // round degrees
 		if ($numPrefix >= 3) {
 			if ($d < 100) {
 				$d = '0' . $d;
