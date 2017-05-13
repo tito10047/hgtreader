@@ -1,7 +1,7 @@
-#world elevations reader
+# world elevations reader
 
 
-##EXAMLE
+## EXAMLE
 ```php
 $lat = 49.386287689;
 $lon = 19.3770275116;
