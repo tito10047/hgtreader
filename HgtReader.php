@@ -121,12 +121,6 @@ class HgtReader {
 		$d  = -$n1 * $a1 - $n2 * $a2 - $n3 * $a3;
 		$zN = (-$n1 * $Xn - $n2 * $Yn - $d) / $n3;
 
-//		echo "{$a1}:{$a2}:{$a3}<br>";
-//		echo "{$b1}:{$b2}:{$b3}<br>";
-//		echo "{$c1}:{$c2}:{$c3}<br>";
-//		echo "{$Xn}:{$Yn}:{$zN}<br>";
-//		exit;
-
 		return $zN;
 	}
 

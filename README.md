@@ -10,6 +10,8 @@ $el = HgtReader::getElevation($lat,$lon);
 echo "elevation on {$lat},{$lon} is {$el}m";
 ```
 
-![usage](https://raw.githubusercontent.com/tito10047/hgt-reader/master/example.png)
-
 you can download htg files [from here](http://www.viewfinderpanoramas.org/Coverage%20map%20viewfinderpanoramas_org3.htm)
+
+
+
+![usage](https://raw.githubusercontent.com/tito10047/hgt-reader/master/example.png)
