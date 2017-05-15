@@ -12,6 +12,8 @@ echo "elevation on {$lat},{$lon} is {$el}m";
 
 you can download htg files [from here](http://www.viewfinderpanoramas.org/Coverage%20map%20viewfinderpanoramas_org3.htm)
 
+### Purpose
 
+![usage1](https://raw.githubusercontent.com/tito10047/hgt-reader/master/example2.png)
 
-![usage](https://raw.githubusercontent.com/tito10047/hgt-reader/master/example.png)
+![usage2](https://raw.githubusercontent.com/tito10047/hgt-reader/master/example.png)
