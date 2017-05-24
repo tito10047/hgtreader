@@ -17,6 +17,7 @@ var lat = 49.386287689
 var lon = 19.3770275116
 var hgtPath = "path/to/hgt"
 hgtReader, err := New(hgtPath,3)
+defer hgtReader.Close()
 el, err := hgtReader.GetElevation(lat,lon)
 fmt.Println(el)
 ```
@@ -26,6 +27,6 @@ you can download htg files [from here](http://www.viewfinderpanoramas.org/Covera
 
 ### Purpose
 
-![usage1](https://raw.githubusercontent.com/tito10047/hgt-reader/master/example2.png)
+![usage1](example2.png)
 
-![usage2](https://raw.githubusercontent.com/tito10047/hgt-reader/master/example.png)
+![usage2](example.png)
