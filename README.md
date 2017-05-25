@@ -6,7 +6,7 @@
 ```php
 $lat = 49.386287689;
 $lon = 19.3770275116;
-$hgtPath = "path/to/hgt"
+$hgtPath = "path/to/hgt";
 HgtReader::init($hgtPath,3);
 $el = HgtReader::getElevation($lat,$lon);
 echo "elevation on {$lat},{$lon} is {$el}m";
