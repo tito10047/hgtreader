@@ -6,7 +6,6 @@ import (
 	"os"
 	"strconv"
 	"fmt"
-	"bufio"
 	"encoding/binary"
 )
 
@@ -91,15 +90,15 @@ func (hr *reader) GetElevation(lat, lon float64) (float64, error) {
 
 	a3, err := hr.getElevationAtPosition(latLon{lat, lon}, a1, a2)
 	if err != nil {
-		return nil, err
+		return 0, err
 	}
 	b3, err := hr.getElevationAtPosition(latLon{lat, lon}, b1, b2)
 	if err != nil {
-		return nil, err
+		return 0, err
 	}
 	c3, err := hr.getElevationAtPosition(latLon{lat, lon}, c1, c2)
 	if err != nil {
-		return nil, err
+		return 0, err
 	}
 
 	var n1 = (c2-a2)*(b3-a3) - (c3-a3)*(b2-a2)
@@ -107,7 +106,7 @@ func (hr *reader) GetElevation(lat, lon float64) (float64, error) {
 	var n3 = (c1-a1)*(b2-a2) - (c2-a2)*(b1-a1)
 	var d = -n1*a1 - n2*a2 - n3*a3
 	var zN = (-n1*Xn - n2*Yn - d) / n3
-	return zN, nil
+	return roundTo(zN,2), nil
 }
 func (hr *reader) getElevationAtPosition(latlon latLon, row float64, column float64) (float64, error) {
 	var addN, addE float64 = 0, 0
@@ -124,21 +123,28 @@ func (hr *reader) getElevationAtPosition(latlon latLon, row float64, column floa
 	var fName = fmt.Sprintf("N%sE%s.hgt", N, E)
 	var file, ok = hr.hgtFiles[fName]
 	if ok == false {
-		file, err := os.Open(hr.hgtFilesDir + "/" + fName)
+		file2, err := os.Open(hr.hgtFilesDir + "/" + fName)
 		if err != nil {
 			return 0, err
 		}
-		hr.hgtFiles[fName] = file
+		hr.hgtFiles[fName] = file2
+		file=file2
 	}
 
 	var aRow = hr.measPerDeg - row
 	var position = ( hr.measPerDeg * (aRow - 1) ) + column
 	position *= 2
-	var short int16
-	file.Seek(int64(position), 0)
-	reader := bufio.NewReader(file)
-	binary.Read(reader, binary.LittleEndian, &short)
-	return float64(short), nil
+	b := make([]byte,2)
+	_, err := file.ReadAt(b,int64(position))
+
+	if err!=nil{
+		fmt.Println(file)
+		return 0,err
+	}
+
+	var g = binary.BigEndian.Uint16(b)
+
+	return float64(g), nil
 }
 
 func prepend(num float64, numPrefix int) string {
