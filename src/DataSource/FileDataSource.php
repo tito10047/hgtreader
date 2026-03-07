@@ -38,7 +38,7 @@ class FileDataSource implements ElevationDataSourceInterface
 
         $val = unpack('n', $data)[1];
 
-        // Ošetrenie signed short
+        // Handle signed short
         if ($val >= 32768) {
             $val -= 65536;
         }

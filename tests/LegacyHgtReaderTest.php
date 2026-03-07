@@ -9,12 +9,12 @@ class LegacyHgtReaderTest extends TestCase
 {
     protected function setUp(): void
     {
-        // Pôvodná classa HgtReader je v roote, je v classmape v composer.json
+        // Original HgtReader class is in the root, it is in the classmap in composer.json
     }
 
     public function testLegacyElevation(): void
     {
-        // Inicializácia starej classy (resolution 3 = Arc3)
+        // Initialization of the old class (resolution 3 = Arc3)
         LegacyHgtReader::init(__DIR__ . '/assets', 3);
 
         $lat = 49.386287689;
@@ -57,13 +57,13 @@ class LegacyHgtReaderTest extends TestCase
 
     public function testExceptionIfNotInitialized(): void
     {
-        // Vynútenie nulového stavu (keďže je to statická classa)
+        // Force null state (since it's a static class)
         $reflection = new \ReflectionClass(LegacyHgtReader::class);
         $instanceProperty = $reflection->getProperty('instance');
         $instanceProperty->setValue(null, null);
 
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage("use HgtReader::init(..., ...);");
+        $this->expectExceptionMessage("Use HgtReader::init(..., ...);");
 
         LegacyHgtReader::getElevation(49, 19);
     }

@@ -11,7 +11,7 @@ class HgtReaderIntegrationTest extends TestCase
 {
     public function testOriginalExample(): void
     {
-        // Pôvodný test.php používal lat=49.386287689, lon=19.3770275116 a očakával 658.66
+        // Original test.php used lat=49.386287689, lon=19.3770275116 and expected 658.66
         $lat = 49.386287689;
         $lon = 19.3770275116;
         
@@ -25,7 +25,7 @@ class HgtReaderIntegrationTest extends TestCase
 
     public function testM16Data(): void
     {
-        // M16/N48W085.hgt presunutý do tests/assets/N48W085.hgt
+        // M16/N48W085.hgt moved to tests/assets/N48W085.hgt
         $lat = 48.5;
         $lon = -84.5; 
         
@@ -38,7 +38,7 @@ class HgtReaderIntegrationTest extends TestCase
 
     public function testP33Data(): void
     {
-        // P33v2/P33/N60E012.hgt presunutý do tests/assets/N60E012.hgt
+        // P33v2/P33/N60E012.hgt moved to tests/assets/N60E012.hgt
         $lat = 60.5;
         $lon = 12.5; 
         

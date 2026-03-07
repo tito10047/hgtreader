@@ -23,12 +23,12 @@ class HgtReader {
 	}
 
 	public static function closeAllFiles() {
-        self::$instance = null; // Destruktor v novom HgtReaderi zavrie všetky zdroje (DataSource::close)
+        self::$instance = null; // Destructor in the new HgtReader will close all sources (DataSource::close)
 	}
 
 	public static function getElevation($lat, $lon, &$fName = null) {
 		if (self::$instance === null) {
-			throw new \Exception("use HgtReader::init(..., ...);");
+			throw new \Exception("Use HgtReader::init(..., ...);");
 		}
         
         if ($fName !== null || func_num_args() > 2) {

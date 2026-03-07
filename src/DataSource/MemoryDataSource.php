@@ -20,7 +20,7 @@ class MemoryDataSource implements ElevationDataSourceInterface
         $data = substr($this->content, $offset, 2);
         $val = unpack('n', $data)[1];
 
-        // Ošetrenie signed short
+        // Handle signed short
         if ($val >= 32768) {
             $val -= 65536;
         }

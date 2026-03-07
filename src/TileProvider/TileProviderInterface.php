@@ -9,8 +9,8 @@ interface TileProviderInterface
 {
     /**
      * @param Coordinate $coordinate
-     * @return ElevationDataSourceInterface Zdroj dát pre .hgt súbor
-     * @throws \Exception Ak súbor neexistuje alebo sa nedá prečítať
+     * @return ElevationDataSourceInterface Data source for the .hgt file
+     * @throws \Exception If the file does not exist or cannot be read
      */
     public function getTileSource(Coordinate $coordinate): ElevationDataSourceInterface;
 }

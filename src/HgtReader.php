@@ -22,7 +22,7 @@ class HgtReader
 
         $measurementsPerDegree = $this->resolution->getMeasurementsPerDegree();
 
-        // Pôvodný algoritmus používa sekundy v rámci hodiny (0-3600)
+        // Original algorithm uses seconds within an hour (0-3600)
         $relLat = $latitude - floor($latitude);
         $relLon = $longitude - floor($longitude);
         
@@ -59,10 +59,10 @@ class HgtReader
             throw new \Exception("{$Xn}:{$Yn}");
         }
 
-        // V pôvodnom kóde row je a1 a column je a2
-        // V SRTM súradniciach: row 0 je severný okraj.
-        // Pôvodný kód v getElevationAtPosition robí: $aRow = self::$measPerDeg - $row;
-        // Takže ak latSec=0 (juh), row=0, aRow=1201 (posledný riadok). Správne.
+        // In original code, row is a1 and column is a2
+        // In SRTM coordinates: row 0 is the northern edge.
+        // Original code in getElevationAtPosition does: $aRow = self::$measPerDeg - $row;
+        // So if latSec=0 (south), row=0, aRow=1201 (last row). Correct.
         
         $a3 = $tile->getElevationAt($a1, $a2);
         $b3 = $tile->getElevationAt($b1, $b2);
