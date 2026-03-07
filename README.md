@@ -1,27 +1,24 @@
 # world elevations reader
 
 
-## EXAMLE
-#### PHP
+## EXAMPLES
+
+### PHP (Modern 2026 API)
 ```php
+use Mostka\HgtReader\HgtReader;
+use Mostka\HgtReader\Resolution;
+use Mostka\HgtReader\TileProvider\LocalFileSystemTileProvider;
+
 $lat = 49.386287689;
 $lon = 19.3770275116;
 $hgtPath = "path/to/hgt";
-HgtReader::init($hgtPath,3);
-$el = HgtReader::getElevation($lat,$lon);
+
+$provider = new LocalFileSystemTileProvider($hgtPath);
+$reader = new HgtReader($provider, Resolution::Arc3);
+
+$el = $reader->getElevation($lat, $lon);
 echo "elevation on {$lat},{$lon} is {$el}m";
 ```
-#### Go
-```go
-var lat = 49.386287689
-var lon = 19.3770275116
-var hgtPath = "path/to/hgt"
-hgtReader, err := hgtreader.New(hgtPath,3)
-defer hgtReader.Close()
-el, err := hgtReader.GetElevation(lat,lon)
-fmt.Println(el)
-```
-
 
 you can download htg files [from here](http://www.viewfinderpanoramas.org/Coverage%20map%20viewfinderpanoramas_org3.htm)
 
