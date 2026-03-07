@@ -14,11 +14,14 @@ class HgtReader {
     private static string $destination;
     private static int $res;
 
-	public static function init($htgFilesDestination, $resolution) {
+    public static function init($htgFilesDestination, $resolution = null) {
         self::$destination = $htgFilesDestination;
-        self::$res = $resolution;
+        self::$res = $resolution ?? 3; // default to 3 for legacy compatibility or storage
         $provider = new LocalFileSystemTileProvider($htgFilesDestination);
-        $resEnum = $resolution === 1 ? Resolution::Arc1 : Resolution::Arc3;
+        $resEnum = null;
+        if ($resolution !== null) {
+            $resEnum = $resolution === 1 ? Resolution::Arc1 : Resolution::Arc3;
+        }
         self::$instance = new NewHgtReader($provider, $resEnum);
 	}
 

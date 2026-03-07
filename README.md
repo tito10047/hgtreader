@@ -33,8 +33,8 @@ $hgtPath = __DIR__ . '/data/hgt';
 // 2. Create a tile provider (TileProvider)
 $provider = new LocalFileSystemTileProvider($hgtPath);
 
-// 3. Initialize the reader with the desired resolution (e.g., SRTM-3)
-$reader = new HgtReader($provider, Resolution::Arc3);
+// 3. Initialize the reader (Resolution is auto-detected from file size)
+$reader = new HgtReader($provider);
 
 // 4. Get precise elevation for coordinates
 $lat = 49.38628;

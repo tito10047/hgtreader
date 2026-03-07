@@ -6,10 +6,14 @@ use Tito10047\HgtReader\DataSource\ElevationDataSourceInterface;
 
 class Tile
 {
+    private readonly Resolution $resolution;
+
     public function __construct(
         private readonly ElevationDataSourceInterface $dataSource,
-        private readonly Resolution $resolution
+        ?Resolution $resolution = null
     ) {
+        $this->resolution = $resolution ?? Resolution::fromFileSize($this->dataSource->getSize());
+        
         $expectedSize = $this->resolution->getMeasurementsPerDegree() ** 2 * 2;
         if ($this->dataSource->getSize() !== $expectedSize) {
             throw new \InvalidArgumentException(sprintf(
@@ -32,6 +36,11 @@ class Tile
         $offset = (($gridSize * ($aRow - 1)) + $column) * 2;
         
         return $this->dataSource->readElevationAt($offset);
+    }
+
+    public function getResolution(): Resolution
+    {
+        return $this->resolution;
     }
 
     public function close(): void

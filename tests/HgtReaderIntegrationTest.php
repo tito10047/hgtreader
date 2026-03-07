@@ -16,7 +16,7 @@ class HgtReaderIntegrationTest extends TestCase
         $lon = 19.3770275116;
         
         $provider = new LocalFileSystemTileProvider(__DIR__ . '/assets');
-        $reader = new HgtReader($provider, Resolution::Arc3);
+        $reader = new HgtReader($provider);
         
         $elevation = $reader->getElevation($lat, $lon);
         
@@ -43,7 +43,7 @@ class HgtReaderIntegrationTest extends TestCase
         $lon = 12.5; 
         
         $provider = new LocalFileSystemTileProvider(__DIR__ . '/assets');
-        $reader = new HgtReader($provider, Resolution::Arc3);
+        $reader = new HgtReader($provider);
         
         $elevation = $reader->getElevation($lat, $lon);
         $this->assertIsFloat($elevation);

@@ -11,7 +11,7 @@ class HgtReader
 
     public function __construct(
         private readonly TileProviderInterface $tileProvider,
-        private readonly Resolution $resolution = Resolution::Arc3
+        private readonly ?Resolution $resolution = null
     ) {
     }
 
@@ -20,7 +20,7 @@ class HgtReader
         $coordinate = new Coordinate($latitude, $longitude);
         $tile = $this->getTile($coordinate);
 
-        $measurementsPerDegree = $this->resolution->getMeasurementsPerDegree();
+        $resolution = $tile->getResolution();
 
         // Original algorithm uses seconds within an hour (0-3600)
         $relLat = $latitude - floor($latitude);
@@ -29,8 +29,8 @@ class HgtReader
         $latSec = $relLat * 3600;
         $lonSec = $relLon * 3600;
 
-        $Xn = round($latSec / $this->resolution->value, 3);
-        $Yn = round($lonSec / $this->resolution->value, 3);
+        $Xn = round($latSec / $resolution->value, 3);
+        $Yn = round($lonSec / $resolution->value, 3);
 
         $a1 = (int)round($Xn);
         $a2 = (int)round($Yn);
