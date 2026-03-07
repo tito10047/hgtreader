@@ -60,7 +60,6 @@ class LegacyHgtReaderTest extends TestCase
         // Vynútenie nulového stavu (keďže je to statická classa)
         $reflection = new \ReflectionClass(LegacyHgtReader::class);
         $instanceProperty = $reflection->getProperty('instance');
-        $instanceProperty->setAccessible(true);
         $instanceProperty->setValue(null, null);
 
         $this->expectException(\Exception::class);
