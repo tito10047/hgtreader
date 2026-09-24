@@ -57,10 +57,12 @@ class LegacyHgtReaderTest extends TestCase
 
     public function testExceptionIfNotInitialized(): void
     {
-        // Force null state (since it's a static class)
+        // Force null state (since it's a static class). The reader is built lazily, so the
+        // recorded configuration has to be cleared as well, not just the instance.
         $reflection = new \ReflectionClass(LegacyHgtReader::class);
-        $instanceProperty = $reflection->getProperty('instance');
-        $instanceProperty->setValue(null, null);
+        $reflection->getProperty('instance')->setValue(null, null);
+        $reflection->getProperty('destination')->setValue(null, null);
+        $reflection->getProperty('res')->setValue(null, null);
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Use HgtReader::init(..., ...);");

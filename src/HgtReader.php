@@ -59,6 +59,16 @@ class HgtReader
             throw new \Exception("{$Xn}:{$Yn}");
         }
 
+        // Near the south / west edge of a tile the neighbouring samples b and c can fall on
+        // index -1, which is outside the grid. Mirror such a step to the opposite side of the
+        // anchor instead of clamping it: clamping would collapse b (or c) onto a, degenerating
+        // the triangle and making $n3 zero.
+        $max = $resolution->getMeasurementsPerDegree() - 1;
+        $b1 = $this->mirror($b1, $a1, $max);
+        $b2 = $this->mirror($b2, $a2, $max);
+        $c1 = $this->mirror($c1, $a1, $max);
+        $c2 = $this->mirror($c2, $a2, $max);
+
         // In original code, row is a1 and column is a2
         // In SRTM coordinates: row 0 is the northern edge.
         // Original code in getElevationAtPosition does: $aRow = self::$measPerDeg - $row;
@@ -76,6 +86,15 @@ class HgtReader
         $zN = (-$n1 * $Xn - $n2 * $Yn - $d) / $n3;
 
         return $zN;
+    }
+
+    /**
+     * Flips a grid index that left the [0, $max] range to the opposite side of $anchor,
+     * keeping it exactly one step away so the interpolation triangle stays non-degenerate.
+     */
+    private function mirror(int $value, int $anchor, int $max): int
+    {
+        return ($value < 0 || $value > $max) ? 2 * $anchor - $value : $value;
     }
 
     private function getTile(Coordinate $coordinate): Tile
